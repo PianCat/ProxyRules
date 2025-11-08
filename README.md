@@ -34,6 +34,23 @@
   - [mihomo_convert_ipv6-0_full-1.js](https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/mihomo_convert_ipv6-0_full-1.js) - 禁用 IPv6，完整配置
   - [mihomo_convert_ipv6-1_full-1.js](https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/mihomo_convert_ipv6-1_full-1.js) - 启用 IPv6，完整配置
 
+**Sparkle/Clash Party 特别设置**
+
+需要注意，Sparkle/Clash Party 在默认设置下还会接管 DNS 和 SNI（域名嗅探），需要手动在设置中关闭「控制 DNS 设置」和「控制域名嗅探」两个选项。
+
+**SubStore 使用方法**
+
+  -  [mihomo_convert_args.js](https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/mihomo_convert_args.js) - SubStore 可导入参数脚本
+
+可传入参数，传入多个参数时，用`&`分隔：
+* `ipv6`：是否启用 IPv6，取值 `0`（禁用）或 `1`（启用），默认值 `1`
+* `full`：是否使用完整配置，取值 `0`（基础配置）或 `1`（完整配置），默认值 `0`
+
+用例：
+```
+https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/mihomo_convert_args.js#ipv6=1&full=0
+```
+
 ### Stash
 
 **配置文件 (.yaml)**
