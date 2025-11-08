@@ -1,0 +1,6 @@
+Mihomo:
+  Mixed_Port: 56365
+
+General:
+  HTTP_Port: 56365
+  SOCKS5_Port: 56366

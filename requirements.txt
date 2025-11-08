@@ -1,0 +1,12 @@
+# ProxyRules 配置生成器依赖
+
+# YAML 处理
+PyYAML>=6.0.1
+ruamel.yaml>=0.18.0
+
+# 模板引擎
+Jinja2>=3.1.2
+
+# 命令行参数解析（Python 标准库，但明确版本要求）
+# argparse 是标准库的一部分，无需额外安装
+

@@ -1,0 +1,97 @@
+# RulesLinkBase.yaml - 链接模板文件使用说明
+#
+# 使用方法：
+# 1. 添加新规则源：在 Categories 节点下添加新的分类名称和 URL 模板
+# 2. URL 模板必须包含占位符：{proxytools} 和/或 {remotefile}
+# 3. 分类名称必须与 Rules.yaml 中的 category 字段完全一致
+#
+# 占位符替换规则：
+# - {proxytools}: 经过映射后的代理工具类型值
+#   * 首先检查 Categories_Tools_List 中是否有对应映射
+#   * 如果原 proxytools 为 "Mihomo"，映射为 "Clash"
+#   * 如果原 proxytools 为其他值，fallback 到 "List"
+# - {remotefile}: 被替换为 Rules.yaml 中的 remotefile 字段值（如 "sogouinput"、"Google.list"）
+#
+# 工具类型说明：
+# - Mihomo 系生成器（包括 Mihomo/Clash/Stash）统一设定原 proxytools 为 "Mihomo"
+# - 其他生成器（Loon/QuanX/Surge）根据工具类型设定对应的原 proxytools 值
+#
+# JS 解析器工作流程：
+# 1. 读取 Rules.yaml 中的规则定义
+# 2. 根据规则的 category 字段查找此文件中的对应分类
+# 3. 获取生成器传入的原 proxytools 值
+# 4. 在 Categories_Tools_List 中查找对应映射：
+#    * 如果存在精确匹配，使用映射值
+#    * 如果不存在，使用 fallback 值
+# 5. 获取 URL 模板并进行占位符替换
+# 6. 生成完整的下载链接用于规则文件下载
+#
+# 示例：
+# 规则 "Google" 的 category 为 "blackmatrix"，remotefile 为 "./Google/Google.list"
+# 转换脚本中 proxytools 定义为 "Clash"
+# 解析器会找到 blackmatrix 的 URL 模板，替换后得到：
+# https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google.list
+#
+# 扩展规则源：
+# 按照以下格式添加新规则源，确保 URL 模板包含必要的占位符
+# {CategoryName}:
+#   url: "http://example.com/{proxytools}/{remotefile}"
+# {AnotherCategory}:
+#   url: "http://example.com/{proxytools}/sometext/{remotefile}"
+#
+# 扩展工具类型映射：
+# 在 Categories_Tools_List 中为新规则源添加工具类型映射
+# {CategoryName}:
+#   Mihomo: "Clash"  # 当原 proxytools 为 "Mihomo" 时，映射为 "Clash"
+#   fallback: "List"     # 其他情况的 fallback 值
+
+Categories:
+  Sukka:
+    url: "https://ruleset.skk.moe/{proxytools}/{remotefile}.{filetype}"
+    
+  ADBlock:
+    url: "https://adrules.top/{remotefile}-{proxytools}"
+    
+  blackmatrix:
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/{proxytools}/{remotefile}"
+
+  dler:
+    url: "https://raw.githubusercontent.com/dler-io/Rules/main/{proxytools}/Provider/{remotefile}.{filetype}"
+
+  PianCat:
+    url: "https://raw.githubusercontent.com/PianCat/CustomProxyRuleset/main/{remotefile}"
+
+# 工具类型映射配置
+# 定义不同规则源中，各工具类型对应的 proxytools 映射值
+# 当原 proxytools 为特定值时，使用映射值；否则 fallback 到通用值
+Categories_Tools_List:
+  Sukka:
+    Mihomo: "Clash"
+    fallback: "List"
+
+  dler:
+    Mihomo: "Clash"
+    fallback: "Surge/Surge 3"
+
+  ADBlock:
+    Mihomo: "mihomo.mrs"
+    QuantumultX: "qx.conf"
+    fallback: "surge.conf"
+  
+  blackmatrix:
+    Mihomo: "Clash"
+    Loon: "Loon"
+    QuantumultX: "QuantumultX"
+    fallback: "Surge"
+
+Categories_Filetype_List:
+  Sukka:
+    Mihomo: "txt"
+    fallback: "conf"
+  
+  dler:
+    Mihomo: "yaml"
+    fallback: "list"
+
+  # ADBlock 和 PianCat 不需要工具类型区分，直接使用 remotefile；blackmatrix 已默认映射，无需重复定义
+  

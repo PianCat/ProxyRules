@@ -1,0 +1,99 @@
+name: Generate Config Files
+
+on:
+  # Trigger when Base directory changes
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'Base/**'
+      - '.github/workflows/auto_generate.yml'
+      - 'Generator/**'
+      - 'requirements.txt'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Generate configuration files
+        run: |
+          python Generator/config_generator.py --tool all
+      
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if [ -n "$(git status --porcelain Config)" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in Config directory"
+            git status --short Config
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected in Config directory"
+          fi
+      
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event_name == 'push'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add Config/
+          
+          # 获取最近一次 Base 文件夹的 commit 消息
+          BASE_COMMIT_MSG=$(git log -1 --pretty=format:"%s" -- Base/)
+          
+          # 使用 Base 文件夹的 commit 消息作为提交消息
+          git commit -m "Generator: $BASE_COMMIT_MSG" || exit 0
+          git push
+      
+      - name: Generate summary
+        if: always()
+        run: |
+          echo "## Configuration Files Generated ✅" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Generated Files" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -d "Config" ]; then
+            echo "#### Mihomo" >> $GITHUB_STEP_SUMMARY
+            ls -lh Config/Mihomo/ 2>/dev/null | tail -n +2 | awk '{print "- " $9 " (" $5 ")"}' >> $GITHUB_STEP_SUMMARY || echo "- No files" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            
+            echo "#### Stash" >> $GITHUB_STEP_SUMMARY
+            ls -lh Config/Stash/ 2>/dev/null | tail -n +2 | awk '{print "- " $9 " (" $5 ")"}' >> $GITHUB_STEP_SUMMARY || echo "- No files" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            
+            echo "#### Loon" >> $GITHUB_STEP_SUMMARY
+            ls -lh Config/Loon/ 2>/dev/null | tail -n +2 | awk '{print "- " $9 " (" $5 ")"}' >> $GITHUB_STEP_SUMMARY || echo "- No files" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Config directory does not exist" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "Generated at: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+
