@@ -49,3 +49,6 @@ htmlcov/
 *.tmp
 *.bak
 *.orig
+
+# Temporary folders
+Temp/

@@ -153,6 +153,10 @@ interface-mode = auto
                     # 使用 filter 筛选
                     filter_name = self._get_filter_name_for_group(name)
                     return f"{name} = select, {filter_name}{img_url_part}"
+                elif 'exclude-filter' in group:
+                    # 其他节点组，使用 exclude-filter
+                    filter_name = self._get_filter_name_for_group(name)
+                    return f"{name} = select, {filter_name}{img_url_part}"
                 else:
                     return f"{name} = select, ALL_Filter{img_url_part}"
             else:
@@ -204,6 +208,9 @@ interface-mode = auto
         lines = ["[Proxy Group]"]
         
         for group in proxy_groups:
+            # 跳过 GLOBAL 组（Loon 配置中不需要）
+            if group.get('name') == 'GLOBAL':
+                continue
             try:
                 group_line = self._generate_proxy_group(group)
                 lines.append(group_line)
@@ -305,17 +312,57 @@ interface-mode = auto
         sections.append(self._generate_plugin_section())
         sections.append("")
         
-        # 生成 Remote Filter 段
-        if node_names:
-            sections.append(self._generate_remote_filter_section(node_names))
-            sections.append("")
+        # 生成 Remote Filter 段（始终生成，即使没有节点列表）
+        sections.append(self._generate_remote_filter_section(node_names))
+        sections.append("")
         
-        # 生成 Proxy Group 段
+        # 生成 Proxy Group 段（始终生成，即使没有节点列表）
         if node_names:
             proxy_result = self.proxy_groups_generator.generate_all_groups(node_names)
             proxy_groups = proxy_result['proxy-groups']
-            sections.append(self._generate_proxy_groups_section(proxy_groups))
-            sections.append("")
+        else:
+            # 即使没有节点列表，也生成完整的代理组结构
+            # 使用默认的地区节点名称，这样生成的配置文件结构完整
+            default_country_names = ['香港', '台湾', '新加坡', '日本', '美国']
+            default_country_group_names = [f"{name}节点" for name in default_country_names] + ['其他节点']
+            
+            # 生成基础代理组
+            base_groups = self.proxy_groups_generator.generate_base_groups(default_country_group_names)
+            
+            # 生成策略代理组
+            policy_groups = self.proxy_groups_generator.generate_policy_groups(default_country_group_names)
+            
+            # 生成地区代理组（使用默认地区）
+            from Generator.core.node_parser import CountryInfo, NodeParser
+            node_parser = NodeParser()
+            default_country_info = []
+            for country_name in default_country_names:
+                if country_name in node_parser.COUNTRIES_META:
+                    meta = node_parser.COUNTRIES_META[country_name]
+                    default_country_info.append(
+                        CountryInfo(
+                            name=country_name,
+                            count=0,
+                            pattern=meta['pattern'],
+                            icon_url=meta['icon']
+                        )
+                    )
+            # 添加"其他节点"组
+            default_country_info.append(
+                CountryInfo(
+                    name='其他',
+                    count=0,
+                    pattern=node_parser._generate_other_pattern(),
+                    icon_url='https://testingcf.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png'
+                )
+            )
+            country_groups = self.proxy_groups_generator.generate_country_groups(default_country_info)
+            
+            # 组合所有代理组
+            proxy_groups = base_groups + policy_groups + country_groups
+        
+        sections.append(self._generate_proxy_groups_section(proxy_groups))
+        sections.append("")
         
         # 生成 Remote Rule 段
         sections.append(self._generate_remote_rules_section())

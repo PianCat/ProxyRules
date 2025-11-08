@@ -119,7 +119,7 @@ class ProxyGroupsGenerator:
         groups = []
         
         # 1. 选择代理
-        # 不包含"故障转移"，直接是地区节点
+        # 包含所有地区节点（包括其他节点）和手动选择、DIRECT
         selector_proxies = country_group_names + ['手动选择', 'DIRECT']
         groups.append({
             'name': '选择代理',
