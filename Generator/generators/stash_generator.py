@@ -101,7 +101,7 @@ class StashGenerator:
         # Generate proxy groups (always generate, even without node list)
         if node_names:
             proxy_result = self.proxy_groups_generator.generate_all_groups(node_names)
-            config['proxy-groups'] = proxy_result['proxy-groups']
+            proxy_groups = proxy_result['proxy-groups']
         else:
             # Even without node list, generate complete proxy-groups structure
             # Use default country node names to ensure complete config structure
@@ -141,7 +141,11 @@ class StashGenerator:
             country_groups = self.proxy_groups_generator.generate_country_groups(default_country_info)
             
             # Combine all proxy groups
-            config['proxy-groups'] = base_groups + policy_groups + country_groups
+            proxy_groups = base_groups + policy_groups + country_groups
+        
+        # Filter out GLOBAL group for Stash (Stash doesn't need GLOBAL group)
+        proxy_groups = [group for group in proxy_groups if group.get('name') != 'GLOBAL']
+        config['proxy-groups'] = proxy_groups
         
         # Generate rule-providers
         config['rule-providers'] = self.base_loader.get_rule_providers()
@@ -190,7 +194,7 @@ class StashGenerator:
         # Generate proxy groups (always generate, even without node list)
         if node_names:
             proxy_result = self.proxy_groups_generator.generate_all_groups(node_names)
-            config['proxy-groups'] = proxy_result['proxy-groups']
+            proxy_groups = proxy_result['proxy-groups']
         else:
             # Even without node list, generate complete proxy-groups structure
             # Use default country node names to ensure complete config structure
@@ -230,7 +234,11 @@ class StashGenerator:
             country_groups = self.proxy_groups_generator.generate_country_groups(default_country_info)
             
             # Combine all proxy groups
-            config['proxy-groups'] = base_groups + policy_groups + country_groups
+            proxy_groups = base_groups + policy_groups + country_groups
+        
+        # Filter out GLOBAL group for Stash (Stash doesn't need GLOBAL group)
+        proxy_groups = [group for group in proxy_groups if group.get('name') != 'GLOBAL']
+        config['proxy-groups'] = proxy_groups
         
         # Generate rule-providers
         config['rule-providers'] = self.base_loader.get_rule_providers()
