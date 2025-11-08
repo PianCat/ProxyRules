@@ -563,21 +563,15 @@ function main(config) {
         defaultSelector
     });
     
-    // GLOBAL 代理组 - 使用与 yaml 文件一致的代理列表
-    const globalProxiesList = buildList(
-        PROXY_GROUPS.SELECT,
-        countryGroupNames,
-        "其他节点",
-        PROXY_GROUPS.MANUAL,
-        PROXY_GROUPS.DIRECT
-    );
+    // GLOBAL 代理组 - 完整书写以确保兼容性（包含所有已创建的代理组）
+    const globalProxies = proxyGroups.map(item => item.name);
     proxyGroups.push(
         {
             "name": "GLOBAL",
             "icon": "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png",
             "include-all": true,
             "type": "select",
-            "proxies": globalProxiesList
+            "proxies": globalProxies
         }
     );
 
