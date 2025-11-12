@@ -34,6 +34,16 @@
   - [mihomo_convert_ipv6-0_full-1.js](https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/mihomo_convert_ipv6-0_full-1.js) - 禁用 IPv6，完整配置
   - [mihomo_convert_ipv6-1_full-1.js](https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/mihomo_convert_ipv6-1_full-1.js) - 启用 IPv6，完整配置
 
+
+**Sparkle/Clash Party 使用方法**
+
+推荐使用 [Sparkle](https://github.com/xishang0128/sparkle)
+
+1. 打开覆写
+2. 在上方地址栏中粘贴上方腹泻脚本的链接
+3. 点击「导入」按钮，（可选）将导入后的文件更改名称为你认为合适的名称，并且开启全局
+4. 为对应的配置文件添加该覆写（如果已开启全局则不需要）
+
 **Sparkle/Clash Party 特别设置**
 
 需要注意，Sparkle/Clash Party 在默认设置下还会接管 DNS 和 SNI（域名嗅探），需要手动在设置中关闭「控制 DNS 设置」和「控制域名嗅探」两个选项。
