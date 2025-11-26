@@ -179,14 +179,14 @@ http-api-web-dashboard = false
                 if 'exclude-filter' in group:
                     # 其他节点组，使用排除过滤
                     exclude_pattern = self._get_country_pattern_for_surge(name)
-                    return f"{name} = select, include-other-group=Proxies, update-interval=0, policy-regex-filter=^(?!.*({exclude_pattern})), icon={icon}"
+                    return f"{name} = select, include-other-group=Proxies, update-interval=0, policy-regex-filter=^(?!.*({exclude_pattern})), icon-url={icon}"
                 else:
                     # 手动选择，包含所有节点
-                    return f"{name} = select, include-other-group=Proxies, update-interval=0, icon={icon}"
+                    return f"{name} = select, include-other-group=Proxies, update-interval=0, icon-url={icon}"
             else:
                 # 普通选择组
                 proxies = ', '.join(group.get('proxies', []))
-                return f"{name} = select, {proxies}, icon={icon}"
+                return f"{name} = select, {proxies}, icon-url={icon}"
         
         elif group_type == 'url-test':
             # Surge 使用 smart 类型实现类似 url-test 的功能
@@ -195,15 +195,15 @@ http-api-web-dashboard = false
             # 如果有 filter 字段，说明是国家节点组
             if 'filter' in group:
                 filter_pattern = self._get_country_pattern_for_surge(name)
-                return f"{name} = smart, include-other-group=Proxies, update-interval=0, policy-regex-filter=({filter_pattern}), icon={icon}"
+                return f"{name} = smart, include-other-group=Proxies, update-interval=0, policy-regex-filter=({filter_pattern}), icon-url={icon}"
             else:
                 proxies = ', '.join(group.get('proxies', []))
-                return f"{name} = smart, {proxies}, icon={icon}"
+                return f"{name} = smart, {proxies}, icon-url={icon}"
         
         else:
             # 默认为 select
             proxies = ', '.join(group.get('proxies', []))
-            return f"{name} = select, {proxies}, icon={icon}"
+            return f"{name} = select, {proxies}, icon-url={icon}"
     
     def _generate_proxy_groups_section(self, proxy_groups: List[Dict[str, Any]]) -> str:
         """
@@ -230,7 +230,7 @@ http-api-web-dashboard = false
         # 添加 Proxies 组（用于存放订阅地址）
         lines.append("")
         lines.append("# Proxies")
-        lines.append("Proxies = select, policy-path=<Your Node List Link Here>, update-interval=0, no-alert=0, hidden=0, include-all-proxies=1, icon=https://testingcf.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png")
+        lines.append("Proxies = select, policy-path=<Your Node List Link Here>, update-interval=0, no-alert=0, hidden=0, include-all-proxies=1, icon-url=https://testingcf.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png")
         
         return '\n'.join(lines)
     
