@@ -15,6 +15,7 @@ sys.path.insert(0, str(project_root))
 from Generator.generators.mihomo_generator import MihomoGenerator
 from Generator.generators.stash_generator import StashGenerator
 from Generator.generators.loon_generator import LoonGenerator
+from Generator.generators.surge_generator import SurgeGenerator
 from Generator.utils.file_helper import FileHelper
 
 
@@ -30,6 +31,7 @@ class ConfigGenerator:
         self.mihomo_gen = MihomoGenerator()
         self.stash_gen = StashGenerator()
         self.loon_gen = LoonGenerator()
+        self.surge_gen = SurgeGenerator()
     
     def generate_mihomo(self, node_names: Optional[List[str]] = None):
         """
@@ -77,6 +79,20 @@ class ConfigGenerator:
         
         print(f"Loon configuration files saved to: {output_dir}")
     
+    def generate_surge(self, node_names: Optional[List[str]] = None):
+        """
+        生成 Surge 配置文件
+        
+        Args:
+            node_names: 节点名称列表（用于测试）
+        """
+        print("\nGenerating Surge configuration files...")
+        output_dir = self.output_base / "Surge"
+        
+        self.surge_gen.save_surge_configs(output_dir, node_names)
+        
+        print(f"Surge configuration files saved to: {output_dir}")
+    
     def generate_all(self, node_names: Optional[List[str]] = None):
         """
         生成所有工具的配置文件
@@ -91,6 +107,7 @@ class ConfigGenerator:
         self.generate_mihomo(node_names)
         self.generate_stash(node_names)
         self.generate_loon(node_names)
+        self.generate_surge(node_names)
         
         print("\n" + "=" * 60)
         print("All configuration files generated successfully!")
@@ -139,7 +156,7 @@ def main():
     parser.add_argument(
         '--tool',
         nargs='+',
-        choices=['mihomo', 'stash', 'loon', 'all'],
+        choices=['mihomo', 'stash', 'loon', 'surge', 'all'],
         default=['all'],
         help='指定要生成的工具配置（可指定多个）'
     )
@@ -188,6 +205,8 @@ def main():
                 generator.generate_stash(node_names)
             elif tool == 'loon':
                 generator.generate_loon(node_names)
+            elif tool == 'surge':
+                generator.generate_surge(node_names)
         
         print("\n" + "=" * 60)
         print("Configuration files generated successfully!")

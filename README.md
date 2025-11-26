@@ -11,11 +11,11 @@
 
 | 工具 | 状态 | 说明 |
 |------|------|------|
-| Mihomo | ✅ 已支持 | `.yaml` 覆写文件 和 `.js` 覆写脚本 |
-| Stash | ✅ 已支持 | `.yaml` 覆写文件 和 `.stoverride` 覆写文件 |
-| Loon | ✅ 已支持 | `.lcf` 配置文件 |
+| [Mihomo](#Mihomo) | ✅ 已支持 | `.yaml` 覆写文件 和 `.js` 覆写脚本 |
+| [Stash](#Stash) | ✅ 已支持 | `.yaml` 覆写文件 和 `.stoverride` 覆写文件 |
+| [Loon](#Loon) | ✅ 已支持 | `.lcf` 配置文件 |
+| [Surge](#Surge) | ✅ 已支持 | `.conf` 配置文件 |
 | QuantumultX | ❌ 未支持 | 与其他代理工具配置差异较大，暂不支持 |
-| Surge | 📋 计划中 | 尚未实现 |
 
 
 ## 快速开始
@@ -72,12 +72,24 @@ https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/mihomo_c
   - [一键导入 Stash_override.stoverride](https://intradeus.github.io/http-protocol-redirector?r=stash://install-override?url=https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Stash/Stash_override.stoverride) - 启用 IPv6 版本 ⭐ 推荐
   - [一键导入 Stash_override_no_ipv6.stoverride](https://intradeus.github.io/http-protocol-redirector?r=stash://install-override?url=https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Stash/Stash_override_no_ipv6.stoverride) - 禁用 IPv6 版本
 
+### Surge
+
+**配置文件 (.conf)**
+  - [config.conf](surge:///install-config?url=https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2FPianCat%2FProxyRules%2Fmain%2FConfig%2FSurge%2Fconfig%2Econf) - 启用 IPv6 版本 ⭐ 推荐
+  - [config_no_ipv6.conf](surge:///install-config?url=https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2FPianCat%2FProxyRules%2Fmain%2FConfig%2FSurge%2Fconfig%2Econf) - 禁用 IPv6 版本
+
 ### Loon
 
 **配置文件 (.lcf)**
 - 点击以下链接直接导入到 Loon（推荐）：
   - [一键导入 config.lcf](https://intradeus.github.io/http-protocol-redirector?r=loon://import?sub=https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Loon/config.lcf) - 启用 IPv6 版本 ⭐ 推荐
   - [一键导入 config_no_ipv6.lcf](https://intradeus.github.io/http-protocol-redirector?r=loon://import?sub=https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Loon/config_no_ipv6.lcf) - 禁用 IPv6 版本
+
+**使用方法：**
+1. 下载配置文件到本地
+2. 在 Surge 中选择「从文件导入配置」
+3. 选择下载的 `.conf` 文件
+4. 在配置中添加你的代理节点订阅（替换 `policy-path=订阅地址`）
 
 
 ## 分流策略

@@ -286,6 +286,85 @@ class RuleLoader:
         
         return remote_rules
     
+    def generate_surge_remote_rules(self) -> List[str]:
+        """
+        为 Surge 生成远程规则列表
+        
+        Returns:
+            规则字符串列表
+        """
+        remote_rules = []
+        all_rules = self.get_all_rules()
+        
+        # 规则键到策略组名称、标签和选项的映射
+        rule_policy_mapping = {
+            'AI': ('AI', 'AI', ''),
+            'Telegram': ('Telegram', 'Telegram', ''),
+            'YouTube': ('YouTube', 'YouTube', ''),
+            'YouTubeMusic': ('YouTube', 'YouTube Music', ''),
+            'Netflix': ('Netflix', 'Netflix', ''),
+            'TikTok': ('TikTok', 'TikTok', ''),
+            'Spotify': ('Spotify', 'Spotify', ''),
+            'Steam': ('Steam', 'Steam', ''),
+            'Game': ('Game', 'Game', ''),
+            'E-Hentai': ('E-Hentai', 'E-Hentai', ''),
+            'PornSite': ('PornSite', 'PornSite', ''),
+            'Furrybar': ('PornSite', 'Furrybar', ''),
+            'Stream_US': ('US Media', 'US Media', ''),
+            'Stream_TW': ('Taiwan Media', 'Taiwan Media', ''),
+            'Stream_JP': ('Japan Media', 'Japan Media', ''),
+            'Stream_Global': ('Global Media', 'Global Media', ''),
+            'Apple': ('Apple', 'Apple', ''),
+            'Microsoft': ('Microsoft', 'Microsoft', ''),
+            'Google': ('Google', 'Google', ''),
+            'GoogleFCM': ('Google FCM', 'Google FCM', ''),
+            'SogouPrivacy': ('Sogou Privacy', 'Sogou Privacy', ''),
+            'ADBlock': ('ADBlock', 'ADBlock', 'extended-matching'),
+        }
+        
+        # 按顺序添加规则
+        rule_order = [
+            'ADBlock',  # 广告拦截放在最前面
+            'AI', 'Telegram', 'YouTube', 'YouTubeMusic', 'Netflix', 
+            'TikTok', 'Spotify', 'Steam', 'Game', 'E-Hentai', 
+            'PornSite', 'Furrybar', 'Stream_US', 'Stream_TW', 
+            'Stream_JP', 'Stream_Global', 'Apple', 'Microsoft', 
+            'Google', 'GoogleFCM', 'SogouPrivacy'
+        ]
+        
+        for rule_key in rule_order:
+            if rule_key not in all_rules:
+                continue
+            
+            rule_config = all_rules[rule_key]
+            url = self.generate_rule_url(rule_key, rule_config, 'Surge')
+            
+            if not url:
+                continue
+            
+            # 获取策略组名称、标签和选项
+            if rule_key in rule_policy_mapping:
+                policy_name, tag_name, options = rule_policy_mapping[rule_key]
+            else:
+                # 默认使用规则名称
+                policy_name = rule_config.get('name', rule_key)
+                tag_name = policy_name
+                options = ''
+            
+            # 添加注释
+            if remote_rules:
+                remote_rules.append("")
+            remote_rules.append(f"# {tag_name}")
+            
+            # Surge 格式: RULE-SET,URL,策略组名称,选项
+            if options:
+                remote_rules.append(f"RULE-SET,{url},{policy_name},{options}")
+            else:
+                remote_rules.append(f"RULE-SET,{url},{policy_name}")
+        
+        return remote_rules
+
+    
     def get_rule_names(self) -> List[str]:
         """
         获取所有规则名称列表
