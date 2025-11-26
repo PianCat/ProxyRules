@@ -75,8 +75,8 @@ https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/mihomo_c
 ### Surge
 
 **配置文件 (.conf)**
-  - [config.conf](surge:///install-config?url=https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2FPianCat%2FProxyRules%2Fmain%2FConfig%2FSurge%2Fconfig%2Econf) - 启用 IPv6 版本 ⭐ 推荐
-  - [config_no_ipv6.conf](surge:///install-config?url=https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2FPianCat%2FProxyRules%2Fmain%2FConfig%2FSurge%2Fconfig%2Econf) - 禁用 IPv6 版本
+  - [一键导入 config.conf](https://intradeus.github.io/http-protocol-redirector?r=surge:///install-config?url=https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2FPianCat%2FProxyRules%2Fmain%2FConfig%2FSurge%2Fconfig%2Econf) - 启用 IPv6 版本 ⭐ 推荐
+  - [一键导入 config_no_ipv6.conf](https://intradeus.github.io/http-protocol-redirector?r=surge:///install-config?url=https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2FPianCat%2FProxyRules%2Fmain%2FConfig%2FSurge%2Fconfig%2Econf) - 禁用 IPv6 版本
 
 ### Loon
 
