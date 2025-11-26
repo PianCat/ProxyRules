@@ -126,6 +126,7 @@ http-api-web-dashboard = false
         # Surge 的 DIRECT 是内置策略，不需要在 [Proxy] 段定义
         return """[Proxy]
 # 在此添加你的代理节点
+# 使用 #!include <ProfileName>.conf 关联其他配置，或在下方的 `Proxies` 中添加订阅地址（仅限单条）
 """
     
     def _get_country_pattern_for_surge(self, group_name: str) -> str:
@@ -178,10 +179,10 @@ http-api-web-dashboard = false
                 if 'exclude-filter' in group:
                     # 其他节点组，使用排除过滤
                     exclude_pattern = self._get_country_pattern_for_surge(name)
-                    return f"{name} = select, policy-path=订阅地址, update-interval=0, policy-regex-filter=^(?!.*({exclude_pattern})), icon={icon}"
+                    return f"{name} = select, include-other-group=Proxies, update-interval=0, policy-regex-filter=^(?!.*({exclude_pattern})), icon={icon}"
                 else:
                     # 手动选择，包含所有节点
-                    return f"{name} = select, policy-path=订阅地址, update-interval=0, icon={icon}"
+                    return f"{name} = select, include-other-group=Proxies, update-interval=0, icon={icon}"
             else:
                 # 普通选择组
                 proxies = ', '.join(group.get('proxies', []))
@@ -194,7 +195,7 @@ http-api-web-dashboard = false
             # 如果有 filter 字段，说明是国家节点组
             if 'filter' in group:
                 filter_pattern = self._get_country_pattern_for_surge(name)
-                return f"{name} = smart, policy-path=订阅地址, update-interval=0, policy-regex-filter=({filter_pattern}), icon={icon}"
+                return f"{name} = smart, include-other-group=Proxies, update-interval=0, policy-regex-filter=({filter_pattern}), icon={icon}"
             else:
                 proxies = ', '.join(group.get('proxies', []))
                 return f"{name} = smart, {proxies}, icon={icon}"
@@ -225,6 +226,11 @@ http-api-web-dashboard = false
                 lines.append(group_line)
             except Exception as e:
                 print(f"  Warning: Error generating proxy group {group.get('name', 'unknown')}: {e}")
+        
+        # 添加 Proxies 组（用于存放订阅地址）
+        lines.append("")
+        lines.append("# Proxies")
+        lines.append("Proxies = select, policy-path=<Your Node List Link Here>, update-interval=0, no-alert=0, hidden=0, include-all-proxies=1, icon=https://testingcf.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png")
         
         return '\n'.join(lines)
     
