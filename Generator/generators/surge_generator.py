@@ -60,9 +60,9 @@ class SurgeGenerator:
         internet_test_url = self.base_loader.internet_test_url
         proxy_test_url = self.base_loader.proxy_test_url
         
-        # 从 Base 文件获取 Fake IP Filter（用于 always-real-ip）
-        # Surge 的 always-real-ip 和 Mihomo 的 fake-ip-filter 功能相同
-        always_real_ip = ', '.join(self.base_loader.fake_ip_filter)
+        # 从 Base 文件获取 Surge Always Real IP 列表
+        # Surge 使用专门的 Surge_Always_Real_IP 列表
+        always_real_ip = ', '.join(self.base_loader.surge_always_real_ip)
         
         general_config = f"""[General]
 # 日志级别
@@ -104,7 +104,7 @@ read-etc-hosts = true
 exclude-simple-hostnames = true
 skip-proxy = 192.168.0.0/24, 10.0.0.0/8, 172.16.0.0/12, 127.0.0.1, localhost, *.local, captive.apple.com, passenger.t3go.cn, *.ccb.com, wxh.wo.cn, *.abcchina.com, *.abcchina.com.cn
 
-# Always Real IP (与 Mihomo 的 fake-ip-filter 功能相同)
+# Always Real IP (Surge 专用列表)
 always-real-ip = {always_real_ip}
 
 # 其他设置

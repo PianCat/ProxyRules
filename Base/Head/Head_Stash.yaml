@@ -6,4 +6,4 @@ dns:
   ipv6: true
   default-nameserver: {DNS_IP_List}
   nameserver: {DNS_DoH_List}
-  fake-ip-filter: {Fake-IP-Filter_List}
+  fake-ip-filter: {Fake_IP_Filter_List}

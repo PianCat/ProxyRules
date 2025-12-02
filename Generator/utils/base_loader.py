@@ -44,6 +44,7 @@ class BaseLoader:
         fake_ip_file = self.base_dir / "Fake_IP_Filter.yaml"
         fake_ip_data = YamlHelper.load_yaml(fake_ip_file)
         self.fake_ip_filter = fake_ip_data.get('Fake_IP_Filter', [])
+        self.surge_always_real_ip = fake_ip_data.get('Surge_Always_Real_IP', [])
         
         # 测试 URL（使用自定义格式解析，因为文件使用 = 而不是 YAML 格式）
         test_url_file = self.base_dir / "Test_URL.yaml"
@@ -239,6 +240,8 @@ class BaseLoader:
             'GoogleFCM': ('GoogleFCM', 'Google FCM'),
             'SogouPrivacy': ('SogouPrivacy', 'Sogou Privacy'),
             'ADBlock': ('ADBlock', 'ADBlock'),
+            'LocalNetwork_Non-IP': ('LocalNetwork_Non-IP', '直接连接'),
+            'LocalNetwork_IP': ('LocalNetwork_IP', '直接连接'),
         }
         
         # 按顺序添加规则
@@ -247,7 +250,8 @@ class BaseLoader:
             'TikTok', 'Spotify', 'Steam', 'Game', 'E-Hentai', 
             'PornSite', 'Furrybar', 'Stream_US', 'Stream_TW', 
             'Stream_JP', 'Stream_Global', 'Apple', 'Microsoft', 
-            'Google', 'GoogleFCM', 'SogouPrivacy', 'ADBlock'
+            'Google', 'GoogleFCM', 'SogouPrivacy', 'ADBlock',
+            'LocalNetwork_Non-IP', 'LocalNetwork_IP'
         ]
         
         for rule_key in rule_order:

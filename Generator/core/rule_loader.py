@@ -252,6 +252,8 @@ class RuleLoader:
             'GoogleFCM': ('Google FCM', 'Google FCM'),
             'SogouPrivacy': ('Sogou Privacy', 'Sogou Privacy'),
             'ADBlock': ('ADBlock', 'ADBlock'),
+            'LocalNetwork_Non-IP': ('直接连接', 'LocalNetwork Non-IP'),
+            'LocalNetwork_IP': ('直接连接', 'LocalNetwork IP'),
         }
         
         # 按顺序添加规则
@@ -260,7 +262,8 @@ class RuleLoader:
             'TikTok', 'Spotify', 'Steam', 'Game', 'E-Hentai', 
             'PornSite', 'Furrybar', 'Stream_US', 'Stream_TW', 
             'Stream_JP', 'Stream_Global', 'Apple', 'Microsoft', 
-            'Google', 'GoogleFCM', 'SogouPrivacy', 'ADBlock'
+            'Google', 'GoogleFCM', 'SogouPrivacy', 'ADBlock',
+            'LocalNetwork_Non-IP', 'LocalNetwork_IP'
         ]
         
         for rule_key in rule_order:
@@ -320,6 +323,8 @@ class RuleLoader:
             'GoogleFCM': ('Google FCM', 'Google FCM', ''),
             'SogouPrivacy': ('Sogou Privacy', 'Sogou Privacy', ''),
             'ADBlock': ('ADBlock', 'ADBlock', 'extended-matching'),
+            'LocalNetwork_Non-IP': ('直接连接', 'LocalNetwork Non-IP', ''),
+            'LocalNetwork_IP': ('直接连接', 'LocalNetwork IP', ''),
         }
         
         # 按顺序添加规则
@@ -329,7 +334,8 @@ class RuleLoader:
             'TikTok', 'Spotify', 'Steam', 'Game', 'E-Hentai', 
             'PornSite', 'Furrybar', 'Stream_US', 'Stream_TW', 
             'Stream_JP', 'Stream_Global', 'Apple', 'Microsoft', 
-            'Google', 'GoogleFCM', 'SogouPrivacy'
+            'Google', 'GoogleFCM', 'SogouPrivacy',
+            'LocalNetwork_Non-IP', 'LocalNetwork_IP'
         ]
         
         for rule_key in rule_order:

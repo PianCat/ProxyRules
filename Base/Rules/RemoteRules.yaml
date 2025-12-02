@@ -167,3 +167,15 @@ rules:
     category: "ADBlock"
     behavior: "domain"
     remotefile: "./adrules"
+
+# LocalNetwork
+  LocalNetwork_Non-IP:
+    name: "LocalNetwork_Non-IP"
+    category: "Sukka"
+    behavior: "classical"
+    remotefile: "./non_ip/lan"
+  LocalNetwork_IP:
+    name: "LocalNetwork_IP"
+    category: "Sukka"
+    behavior: "classical"
+    remotefile: "./ip/lan"
