@@ -23,10 +23,10 @@
 ### Mihomo (Clash Meta)
 
 **覆写文件 (.yaml)**
-  - [config_ipv6-1_full-0.yaml](https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/config_ipv6-1_full-0.yaml) - 启用 IPv6，基础配置 ⭐ 推荐
-  - [config_ipv6-0_full-0.yaml](https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/config_ipv6-0_full-0.yaml) - 禁用 IPv6，基础配置
-  - [config_ipv6-0_full-1.yaml](https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/config_ipv6-0_full-1.yaml) - 禁用 IPv6，完整配置
-  - [config_ipv6-1_full-1.yaml](https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/config_ipv6-1_full-1.yaml) - 启用 IPv6，完整配置
+  - [mihomo_config_ipv6-1_full-0.yaml](https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/mihomo_config_ipv6-1_full-0.yaml) - 启用 IPv6，基础配置 ⭐ 推荐
+  - [mihomo_config_ipv6-0_full-0.yaml](https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/mihomo_config_ipv6-0_full-0.yaml) - 禁用 IPv6，基础配置
+  - [mihomo_config_ipv6-0_full-1.yaml](https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/mihomo_config_ipv6-0_full-1.yaml) - 禁用 IPv6，完整配置
+  - [mihomo_config_ipv6-1_full-1.yaml](https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/mihomo_config_ipv6-1_full-1.yaml) - 启用 IPv6，完整配置
 
 **覆写脚本 (.js)**
   - [mihomo_convert_ipv6-1_full-0.js](https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/mihomo_convert_ipv6-1_full-0.js) - 启用 IPv6，基础配置 ⭐ 推荐
@@ -75,15 +75,15 @@ https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Mihomo/mihomo_c
 ### Surge
 
 **配置文件 (.conf)**
-  - [一键导入 config.conf](https://intradeus.github.io/http-protocol-redirector?r=surge:///install-config?url=https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2FPianCat%2FProxyRules%2Fmain%2FConfig%2FSurge%2Fconfig%2Econf) - 启用 IPv6 版本 ⭐ 推荐
-  - [一键导入 config_no_ipv6.conf](https://intradeus.github.io/http-protocol-redirector?r=surge:///install-config?url=https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2FPianCat%2FProxyRules%2Fmain%2FConfig%2FSurge%2Fconfig%2Econf) - 禁用 IPv6 版本
+  - [一键导入 Surge_config.conf](https://intradeus.github.io/http-protocol-redirector?r=surge:///install-config?url=https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2FPianCat%2FProxyRules%2Fmain%2FConfig%2FSurge%2FSurge_config%2Econf) - 启用 IPv6 版本 ⭐ 推荐
+  - [一键导入 Surge_config_no_ipv6.conf](https://intradeus.github.io/http-protocol-redirector?r=surge:///install-config?url=https%3A%2F%2Fraw%2Egithubusercontent%2Ecom%2FPianCat%2FProxyRules%2Fmain%2FConfig%2FSurge%2FSurge_config_no_ipv6%2Econf) - 禁用 IPv6 版本
 
 ### Loon
 
 **配置文件 (.lcf)**
 - 点击以下链接直接导入到 Loon（推荐）：
-  - [一键导入 config.lcf](https://intradeus.github.io/http-protocol-redirector?r=loon://import?sub=https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Loon/config.lcf) - 启用 IPv6 版本 ⭐ 推荐
-  - [一键导入 config_no_ipv6.lcf](https://intradeus.github.io/http-protocol-redirector?r=loon://import?sub=https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Loon/config_no_ipv6.lcf) - 禁用 IPv6 版本
+  - [一键导入 Loon_config.lcf](https://intradeus.github.io/http-protocol-redirector?r=loon://import?sub=https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Loon/Loon_config.lcf) - 启用 IPv6 版本 ⭐ 推荐
+  - [一键导入 Loon_config_no_ipv6.lcf](https://intradeus.github.io/http-protocol-redirector?r=loon://import?sub=https://raw.githubusercontent.com/PianCat/ProxyRules/main/Config/Loon/Loon_config_no_ipv6.lcf) - 禁用 IPv6 版本
 
 **使用方法：**
 1. 下载配置文件到本地

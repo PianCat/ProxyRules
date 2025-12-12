@@ -386,8 +386,8 @@ interface-mode = auto
         
         # 生成两个版本：默认（IPv6启用）和 禁用IPv6
         configs = [
-            {'ipv6': True, 'filename': 'config.lcf'},
-            {'ipv6': False, 'filename': 'config_no_ipv6.lcf'}
+            {'ipv6': True, 'filename': 'Loon_config.lcf'},
+            {'ipv6': False, 'filename': 'Loon_config_no_ipv6.lcf'}
         ]
         
         for config in configs:

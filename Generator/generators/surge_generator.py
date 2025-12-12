@@ -126,7 +126,7 @@ http-api-web-dashboard = false
         # Surge 的 DIRECT 是内置策略，不需要在 [Proxy] 段定义
         return """[Proxy]
 # 在此添加你的代理节点
-# 使用 #!include <ProfileName>.conf 关联其他配置，或在下方的 `Proxies` 中添加订阅地址（仅限单条）
+# 使用 #!include <ProfileName>.conf 关联其他配置，或在下方的 `Proxies` 中添加订阅地址（仅限单条），若使用 include 则需要删除下方的 policy-path 字段
 """
     
     def _get_country_pattern_for_surge(self, group_name: str) -> str:
@@ -353,8 +353,8 @@ http-api-web-dashboard = false
         
         # 生成两个版本：默认（IPv6启用）和 禁用IPv6
         configs = [
-            {'ipv6': True, 'filename': 'config.conf'},
-            {'ipv6': False, 'filename': 'config_no_ipv6.conf'}
+            {'ipv6': True, 'filename': 'Surge_config.conf'},
+            {'ipv6': False, 'filename': 'Surge_config_no_ipv6.conf'}
         ]
         
         for config in configs:

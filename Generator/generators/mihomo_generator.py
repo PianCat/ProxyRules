@@ -197,7 +197,7 @@ class MihomoGenerator:
                 full_config=combo['full']
             )
             
-            filename = f"config_ipv6-{1 if combo['ipv6'] else 0}_full-{1 if combo['full'] else 0}.yaml"
+            filename = f"mihomo_config_ipv6-{1 if combo['ipv6'] else 0}_full-{1 if combo['full'] else 0}.yaml"
             filepath = output_dir / filename
             
             # Convert to YAML string and add empty lines before sections
